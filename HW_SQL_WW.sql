@@ -18,10 +18,15 @@ SELECT first_name,last_name
 FROM actor 
 WHERE last_name LIKE '%GEN%';
 
--- 2c. Find all actors whose last name contain the letters `GEN`:
+-- 2c. Find all actors whose last names contain the letters `LI`. This time, order the rows by last name and first name, in that order
 SELECT last_name,first_name
 FROM actor 
 WHERE last_name LIKE '%LI%';
+
+-- 2d. Using `IN`, display the `country_id` and `country` columns of the following countries: Afghanistan, Bangladesh, and China:
+SELECT country_id,country
+FROM country 
+WHERE country IN('Afghanistan', 'Bangladesh', 'China');
 
 -- 3a. You want to keep a description of each actor. You don't think you will be performing queries on a description, so create a column in the table `actor` named `description` and use the data type `BLOB` (Make sure to research the type `BLOB`, as the difference between it and `VARCHAR` are significant).
 ALTER TABLE actor ADD COLUMN description BLOB(2000) AFTER last_name;
@@ -96,7 +101,7 @@ SELECT first_name, last_name
             )
               );
 -- 7c. You want to run an email marketing campaign in Canada, for which you will need the names and email addresses of all Canadian customers. Use joins to retrieve this information.
-SELECT email
+SELECT first_name, last_name, email
 FROM customer
 	INNER JOIN address ON
 	customer.address_id=address.address_id
